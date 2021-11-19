@@ -2,16 +2,11 @@ import numpy as np
 import random
 
 
-def backpropagation(train_set, n_x, n_h1, n_h2, n_y, epochs, batch_size, alpha, vectorized):
+def backpropagation(train_set, data_limit, n_x, n_h1, n_h2, n_y, epochs, batch_size, weights, alpha, vectorized):
     total_cost = []
     A3s_Ys = []
 
-    W1 = np.random.randn(n_h1, n_x)
-    b1 = np.zeros((n_h1, 1))
-    W2 = np.random.randn(n_h2, n_h1)
-    b2 = np.zeros((n_h2, 1))
-    W3 = np.random.randn(n_y, n_h2)
-    b3 = np.zeros((n_y, 1))
+    W1, b1, W2, b2, W3, b3 = weights
 
     for range_epoch in range(epochs):
         random.shuffle(train_set)
@@ -19,7 +14,7 @@ def backpropagation(train_set, n_x, n_h1, n_h2, n_y, epochs, batch_size, alpha, 
         # calculate cost average per epoch
         cost = 0
         batches = [train_set[x:x + batch_size] for x in
-                   range(0, 200, batch_size)]  # we don't delete second column anymore
+                   range(0, data_limit, batch_size)]  # we don't delete second column anymore
         for batch in batches:
             grad_W1 = np.zeros((n_h1, n_x))
             grad_b1 = np.zeros((n_h1, 1))
@@ -54,7 +49,7 @@ def backpropagation(train_set, n_x, n_h1, n_h2, n_y, epochs, batch_size, alpha, 
             # use for to find cost for each W and B
         total_cost.append(sum(cost))
         # print(f"{range_epoch + 1} epochs done out of {epochs}")
-    return A3s_Ys, total_cost
+    return A3s_Ys, total_cost, (W1, b1, W2, b2, W3, b3)
 
     #
     # for A0 in train_set[:data_limit]:

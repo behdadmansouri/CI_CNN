@@ -1,12 +1,6 @@
 import numpy as np
-def just_feed_forward(train_set, n_x, n_h1, n_h2, n_y):
-
-    W1 = np.random.randn(n_h1, n_x) * 0.01
-    b1 = np.zeros((n_h1, 1))
-    W2 = np.random.randn(n_h2, n_h1) * 0.01
-    b2 = np.zeros((n_h2, 1))
-    W3 = np.random.randn(n_y, n_h2) * 0.01
-    b3 = np.zeros((n_y, 1))
+def just_feed_forward(train_set, weights):
+    W1, b1, W2, b2, W3, b3 = weights
 
     return feed_forward_calculations(train_set, W1, W2, W3, b1, b2, b3)
 
