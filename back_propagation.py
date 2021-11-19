@@ -53,7 +53,7 @@ def backpropagation(train_set, n_x, n_h1, n_h2, n_y, epochs, batch_size, alpha, 
             b3 = b3 - (alpha * (grad_b3 / batch_size))
             # use for to find cost for each W and B
         total_cost.append(sum(cost))
-        print(f"{range_epoch + 1} epochs done out of {epochs}")
+        # print(f"{range_epoch + 1} epochs done out of {epochs}")
     return A3s_Ys, total_cost
 
     #

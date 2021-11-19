@@ -64,31 +64,43 @@ def loading_datasets():
     # print(len(train_set))  # 1962
     # print(len(test_set))  # 662
     return train_set, test_set
+#
+# def print_correct_percentage(A3s_Ys):
+#     correct = 0
+#
+#     for A3, Y in A3s_Ys:
+#         predicted_number = A3.tolist().index(max(A3))
+#         real_number = Y.tolist().index([1])
+#         print(predicted_number, real_number)
+#         if predicted_number == real_number:
+#             correct += 1
+#
+#     print(f"Accuracy: {correct / len(A3s_Ys)}")
+#
+# def plot_costs_per_epoch(epochs, total_cost):
+#     import matplotlib.pyplot as plt
+#     epoch_size = [x + 1 for x in range(epochs)]
+#     plt.plot(epoch_size, [cost / 4 for cost in total_cost])
+#     plt.show()
 
-def print_correct_percentage(A3s_Ys):
-    correct = 0
 
-    for A3, Y in A3s_Ys:
-        predicted_number = A3.tolist().index(max(A3))
-        real_number = Y.tolist().index([1])
-        print(predicted_number, real_number)
-        if predicted_number == real_number:
-            correct += 1
-
-    print(f"Accuracy: {correct / len(A3s_Ys)}")
-    # correct = 0
-    #
-    # for i in range(batch):
-    #     predicted_number = np.where(output[i] == np.amax(output[i]))
-    #     real_number = np.where(labels[i] == np.amax(labels[i]))
-    #
-    #     if predicted_number == real_number:
-    #         correct += 1
-    #
-    # print(f"Accuracy: {correct / batch}")
-
-def plot_costs_per_epoch(epochs, total_cost):
+def plot_cost(epochs, total_cost):
     import matplotlib.pyplot as plt
+
     epoch_size = [x + 1 for x in range(epochs)]
-    plt.plot(epoch_size, [cost / 4 for cost in total_cost])
+    for each in total_cost:
+        plt.plot(epoch_size, [cost / 4 for cost in each])
     plt.show()
+
+
+def print_correct(A3s_Ys):
+    accu = []
+    for each in A3s_Ys:
+        correct = 0
+        for A3, Y in each:
+            predicted_number = A3.tolist().index(max(A3))
+            real_number = Y.tolist().index([1])
+            if predicted_number == real_number:
+                correct += 1
+        accu.append(correct / len(each))
+    print(f"average accuracy: {100 * sum(accu)/len(accu)}")
